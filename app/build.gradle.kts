@@ -67,15 +67,27 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 
-    implementation(libs.retrofit)
-    implementation(libs.converter)
+//    implementation(libs.retrofit)
+//    implementation(libs.converter)
+//
+//    implementation(libs.coroutoines.core)
+//    implementation(libs.coroutoines.android)
+//
+//    implementation(libs.lifecycle.viewmodel)
+//    implementation(libs.lifecycle.livedata)
+//
+//    implementation(libs.coil.compose)
 
-    implementation(libs.coroutoines.core)
-    implementation(libs.coroutoines.android)
-
-    implementation(libs.lifecycle.viewmodel)
-    implementation(libs.lifecycle.livedata)
-
+    implementation(libs.material3)
+    implementation(libs.compose.material.icons.core)
+    implementation(libs.compose.material.icons.extended)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.runtime.rxjava2)
+    implementation(libs.runtime.livedata)
     implementation(libs.coil.compose)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.navigation.compose)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
 }

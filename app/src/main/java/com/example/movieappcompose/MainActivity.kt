@@ -22,25 +22,29 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import com.example.movieappcompose.RetrofitClient.searchMovies
 import com.example.movieappcompose.ui.theme.MovieAppComposeTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel = MoviesViewModel()
+//     val viewModel = MoviesViewModel()
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +65,7 @@ class MainActivity : ComponentActivity() {
 //
 ////                Scaffold {
 ////                    } //AAAAAAAAAQUI
-                MovieSearchScreen(viewModel)
+                MovieSearchScreen()
 
             }
         }
@@ -70,14 +74,15 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieSearchScreen(moviesViewModel: MoviesViewModel) {
-    val searchTerm = remember { mutableStateOf("") }
-    val movies = remember { mutableStateListOf<Movie>() }
+fun MovieSearchScreen() {
+    var searchTerm by remember { mutableStateOf("") }
+    var movies by remember { mutableStateOf<List<Movie>>(emptyList()) }
 
     Column(modifier = Modifier.fillMaxSize()) {
         TextField(
-            value = searchTerm.value,
-            onValueChange = { searchTerm.value = it },
+            value = searchTerm,
+            onValueChange = { txt ->
+                searchTerm = txt },
             label = { Text(text = "Enter a movie name") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -85,18 +90,26 @@ fun MovieSearchScreen(moviesViewModel: MoviesViewModel) {
         )
 
         Button(
-            onClick = { moviesViewModel.searchMovies(searchTerm.value, movies) },
+            onClick = {
+                movies= runBlocking { searchMovies(searchTerm) }  },
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(16.dp)
         ) {
             Text(text = "Search")
-        }
 
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(movies) { movie ->
-                MovieItem(movie)
-            }
+        }
+        movieList(movies = movies)
+
+
+    }
+}
+
+@Composable
+fun movieList(movies: List<Movie>){
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(movies) { movie ->
+            MovieItem(movie)
         }
     }
 }
@@ -105,15 +118,14 @@ fun MovieSearchScreen(moviesViewModel: MoviesViewModel) {
 fun MovieItem(movie: Movie) {
     Row(modifier = Modifier.padding(16.dp)) {
         Image(
-            painter = rememberAsyncImagePainter(R.drawable.ic_launcher_background),
+            painter = rememberAsyncImagePainter(movie.poster),
             contentDescription = "Movie Poster",
             modifier = Modifier.size(80.dp)
         )
 
         Column(modifier = Modifier.padding(start = 16.dp)) {
-            Text(text = movie.title, style = MaterialTheme.typography.bodyMedium)
-            Text(text = movie.year, style = MaterialTheme.typography.bodySmall)
-            Text(text = movie.type, style = MaterialTheme.typography.bodySmall)
+            Text(text = movie.title)
+//            Text(text = movie.released)
         }
     }
 }

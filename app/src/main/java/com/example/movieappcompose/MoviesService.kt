@@ -1,5 +1,6 @@
 package com.example.movieappcompose
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -7,13 +8,9 @@ import retrofit2.http.Query
 interface MoviesService {
     @GET("/")
     suspend fun searchMovies(
-        @Query("s") searchTerm: String,
-        @Query("apiKey") apikey: String
+        @Query("apiKey") apikey: String,
+        @Query("s") searchTerm: String
+
     ): Response<MovieSearchResponse>
 }
 
-data class MovieSearchResponse(
-    val search: List<Movie>,
-    val rotalResult:Int,
-    val response: String
-)

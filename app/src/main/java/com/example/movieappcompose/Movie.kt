@@ -1,16 +1,16 @@
 package com.example.movieappcompose
 
+import com.google.gson.annotations.SerializedName
+
 data class Movie(
-    val id: Int,
+    @SerializedName("imdbID")
+    val id: String,
+    @SerializedName("Title")
     val title: String,
+    @SerializedName("Poster")
     val poster: String,
+    @SerializedName("Released")
     val released: String,
-    val runTime: String,
-    val year: String,
-    val type: String,
-    val genre: String,
-    val boxOffice: String,
-    val director: String,
-    val plot: String,
-    val actors: String
+    @SerializedName("Response")
+    val response: String
 )
