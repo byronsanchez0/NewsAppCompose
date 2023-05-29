@@ -90,4 +90,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    implementation(libs.material.v)
+    implementation(libs.material.icons.v)
+
 }
