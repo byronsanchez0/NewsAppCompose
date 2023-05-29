@@ -50,7 +50,7 @@ fun LoginScreen(
                 val userLogged = performLogin(username, password)
                 if (userLogged != null) {
                     onLoginSuccess(context, userLogged)
-                    navHostController.navigate("main")
+                    navHostController.navigate("mainscreen")
                 } else {
                     // Show an error message or handle login failure
                 }

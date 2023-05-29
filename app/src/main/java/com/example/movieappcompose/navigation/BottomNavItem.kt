@@ -1,18 +1,19 @@
 package com.example.movieappcompose.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.CameraAlt
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomNavItem(var icon: ImageVector, var route: String){
-    object Home : BottomNavItem(
-        Icons.Outlined.Home,
-        "home"
+    object SearchMovie : BottomNavItem(
+        Icons.Filled.Search,
+        "moviesearchscreen"
     )
 
-    object OpenCamera : BottomNavItem(
+    object Favorites : BottomNavItem(
         Icons.Outlined.CameraAlt,
         "favorites"
     )
 }
+

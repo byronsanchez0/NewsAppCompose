@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieApp Compose</string>
+    <string name="start_playlist">addfav</string>
 </resources>

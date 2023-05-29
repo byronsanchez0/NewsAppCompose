@@ -57,6 +57,7 @@ fun Details(
             }
         }
     }
+}
 //
 //    ModalBottomSheetLayout(scaffoldState = scaffoldState, sheetPeekHeight = 128.dp, sheetContent = {
 //        Box(
@@ -86,7 +87,7 @@ fun Details(
 //        }
 //    }
 
-}
+
 
 //@OptIn(ExperimentalMaterial3Api::class)
 //@Composable

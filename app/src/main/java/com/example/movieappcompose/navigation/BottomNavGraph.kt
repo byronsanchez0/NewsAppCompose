@@ -11,10 +11,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.movieappcompose.Details
 import com.example.movieappcompose.MovieSearchScreen
+import com.example.movieappcompose.MoviesViewModel
+import com.example.movieappcompose.repo.FavRepo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomNavGraph(navHostController: NavHostController) {
+fun BottomNavGraph(navHostController: NavHostController, moviesViewModel: MoviesViewModel) {
+
 //    val cameraViewModelaViewModel = remember {
 //        CameraViewModel()
 //    }
@@ -26,25 +29,27 @@ fun BottomNavGraph(navHostController: NavHostController) {
 //    }
     NavHost(
     navController = navHostController,
-    startDestination = "MovieSearchScreen"
+    startDestination = "moviesearchscreen"
     ) {
-        composable("MainScreen"){
-            MainScreen()
+        composable("moviesearchscreen"){
+            MovieSearchScreen(moviesViewModel)
         }
         composable(route= "favorites"){
-            FavoritesScreen()
+            FavoritesScreen(moviesViewModel)
         }
-        composable("MovieSearchScreen"){
-            MovieSearchScreen()
-        }
+
     }
 }
 
 @Composable
-fun FavoritesScreen() {
+fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
     val context = LocalContext.current
     val id = getUserId(context)
     Text(text = "ALGO $id")
+
+    val movis = moviesViewModel.getFavMovie()
+    println(movis)
+
 }
 
 private fun getUserId(context: Context) : Int {

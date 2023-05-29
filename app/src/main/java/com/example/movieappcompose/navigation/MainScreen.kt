@@ -1,7 +1,5 @@
 package com.example.movieappcompose.navigation
 
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
@@ -16,17 +14,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.movieappcompose.LoginScreen
+import com.example.movieappcompose.MoviesViewModel
 
 @Composable
-fun MainScreen() {
+fun MainScreen(moviesViewModel : MoviesViewModel) {
 
 
 
@@ -35,7 +32,7 @@ fun MainScreen() {
         bottomBar = { BottomBar(navHostController = navController) }
     ) {
         ActivityResultContracts.RequestPermission()
-        BottomNavGraph(navHostController = navController)
+        BottomNavGraph(navHostController = navController, moviesViewModel)
         Column(
             Modifier.padding(it)
         ) {
@@ -49,8 +46,8 @@ fun MainScreen() {
 @Composable
 fun BottomBar(navHostController: NavHostController) {
     val screens = listOf(
-        BottomNavItem.Home,
-        BottomNavItem.OpenCamera
+        BottomNavItem.SearchMovie,
+        BottomNavItem.Favorites
     )
 
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()

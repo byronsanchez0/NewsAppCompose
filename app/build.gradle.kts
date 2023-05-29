@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -92,5 +93,11 @@ dependencies {
 
     implementation(libs.material.v)
     implementation(libs.material.icons.v)
+
+    implementation(libs.room)
+    annotationProcessor(libs.room.compiler)
+    kapt(libs.kapt)
+
+
 
 }
