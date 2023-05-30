@@ -14,6 +14,8 @@ data class FavMovie(
     @ColumnInfo(name = "poster") @SerializedName("Poster")
     val poster: String,
     @ColumnInfo(name = "year") @SerializedName("Year")
-    val year: String
+    val year: String,
+    @ColumnInfo(name = "userId") @SerializedName("UserId")
+    val userId: Long
 
 )

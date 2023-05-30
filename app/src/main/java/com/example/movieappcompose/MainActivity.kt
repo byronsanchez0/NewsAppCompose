@@ -1,5 +1,6 @@
 package com.example.movieappcompose
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -176,6 +177,7 @@ fun MovieItem(
     val snackbarHostState = remember { SnackbarHostState() }
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Details(sheetState = sheetState, movie, onDismiss = {
         scope.launch {
@@ -203,7 +205,7 @@ fun MovieItem(
             Text(text = movie.title)
 //            Text(text = movie.released)
         }
-        IconButton(onClick = { viewModel.addtoFavMovie(movie) }) {
+        IconButton(onClick = { viewModel.addtoFavMovie(movie, getUserId(context)) }) {
             Icon(
                 favBtn,
                 contentDescription = stringResource(R.string.start_playlist),
@@ -220,4 +222,7 @@ fun MovieItem(
     }
 }
 
-
+private fun getUserId(context: Context) : Long {
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    return sharedPreferences.getInt("userId", 0).toLong()
+}
