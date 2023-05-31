@@ -8,8 +8,8 @@ class FavRepo (private val favMovieDao: FavMovieDao) {
         favMovieDao.insertAll(favMovie)
     }
 
-    fun getFavMovie(): List<FavMovie> {
-        return favMovieDao.getAll()
+    fun getFavMovie(userId: Long): List<FavMovie> {
+        return favMovieDao.getById(userId)
     }
 
     fun deleteFavMovie(favMovie: FavMovie) {
