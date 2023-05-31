@@ -16,6 +16,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.movieappcompose.Details
+import com.example.movieappcompose.FavoritesScreen
 import com.example.movieappcompose.MovieItem
 import com.example.movieappcompose.MovieSearchScreen
 import com.example.movieappcompose.MoviesViewModel
@@ -48,22 +49,6 @@ fun BottomNavGraph(navHostController: NavHostController, moviesViewModel: Movies
     }
 }
 
-@Composable
-fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
-    val context = LocalContext.current
-    val id = getUserId(context)
-    moviesViewModel.getFavMovie(id.toLong())
-    val movies by moviesViewModel.movies.collectAsState()
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(movies) { movie ->
-            Text("ESTA PELI TE GUTS: ${movie.title}")
-        }
-    }
 
-}
 
-private fun getUserId(context: Context) : Int {
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    return sharedPreferences.getInt("userId", 0)
-}

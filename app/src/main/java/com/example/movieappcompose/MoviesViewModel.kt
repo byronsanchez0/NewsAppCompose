@@ -1,6 +1,7 @@
 package com.example.movieappcompose
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -17,14 +18,17 @@ import kotlinx.coroutines.launch
 class MoviesViewModel (private val favRepo: FavRepo) : ViewModel(){
 
     private val favBtnStateFlow = MutableStateFlow<ImageVector>(Icons.Filled.FavoriteBorder)
+    private val delBtnStateFlow = MutableStateFlow<ImageVector>(Icons.Filled.DeleteForever)
     private val listFavMovie = MutableStateFlow<List<FavMovie>>(listOf())
 //    snackbarHostState = remember {SnackbarHostState()}
     val favBtn: MutableStateFlow<ImageVector> get() = favBtnStateFlow
+    val delBtn: MutableStateFlow<ImageVector> get() = delBtnStateFlow
     val movies: StateFlow<List<FavMovie>> get() = listFavMovie
 
 
 
     fun addtoFavMovie(movie: Movie, userId: Long) {
+
         viewModelScope.launch(Dispatchers.IO) {
             val favMovie = FavMovie(
                 movie.id,
@@ -41,6 +45,7 @@ class MoviesViewModel (private val favRepo: FavRepo) : ViewModel(){
     fun deleteFavMovie(movie: FavMovie) {
         viewModelScope.launch(Dispatchers.IO) {
             favRepo.deleteFavMovie(movie)
+            getFavMovie(movie.userId)
         }
     }
     fun getFavMovie(userId: Long) {

@@ -66,38 +66,35 @@ class MainActivity () : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = this.getSharedPreferences("sp", Context.MODE_PRIVATE)
+        val id = sharedPreferences.getInt("userId", 0)
+
         val db = Room.databaseBuilder(
             this,
             FavDataBase::class.java, FavDataBase.DATABASE_NAME).build()
         val favMoviesRepo = FavRepo(db.favMoviesDao())
+        var startDestination = "login"
+        if (id != 0) {
+            startDestination = "mainscreen"
+        }
+        val context = this
+
         setContent {
             val viewModel = MoviesViewModel(favMoviesRepo)
             MovieAppComposeTheme {
                 val navController = rememberNavController()
-//                val movies = MutableStateFlow(listOf<Movie>())
-//                movies.asStateFlow()
 //
-//                LaunchedEffect(Unit) {
-//                    val userService = RetrofitClient.movieService
-//
-//                    val retrievedUsers = withContext(Dispatchers.IO) {
-//                        userService.getMovies()
-//                    }
-//                    movies.emit(retrievedUsers)
-//                }
-//                println(movies)
-//
-////                Scaffold {
-////                    } //AAAAAAAAAQUI
-//                MainScreen()
-                NavHost(navController = navController, startDestination = "login") {
+                NavHost(navController = navController, startDestination = startDestination) {
                     composable("login") {
-                        LoginScreen(
-                            navController
-                        )
+                        val viewModel = LoginViewModel(context)
+                        LoginScreen(navController, viewModel)
+                    }
+                    composable("signup") {
+                        val viewModel = SignUpViewModel(context)
+                        SignUp(navController, viewModel)
                     }
                     composable("mainscreen") {
-                        MainScreen(viewModel)
+                        MainScreen(navController, viewModel)
                     }
                 }
 
@@ -154,15 +151,6 @@ fun movieList(
         }
 
     }
-//    Snackbar(
-//
-//        action = {
-//            Button(onClick = {}) {
-//                Text("MyAction")
-//            }
-//        },
-//        modifier = Modifier.padding(8.dp)
-//    ) { Text(text = "movie added to favorites!") }
 }
 
 
@@ -223,6 +211,6 @@ fun MovieItem(
 }
 
 private fun getUserId(context: Context) : Long {
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    val sharedPreferences = context.getSharedPreferences("sp", Context.MODE_PRIVATE)
     return sharedPreferences.getInt("userId", 0).toLong()
 }
