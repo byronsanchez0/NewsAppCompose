@@ -3,11 +3,10 @@ package com.example.movieappcompose
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieappcompose.Movie
 import com.example.movieappcompose.entity.FavMovie
 import com.example.movieappcompose.repo.FavRepo
 import kotlinx.coroutines.Dispatchers
