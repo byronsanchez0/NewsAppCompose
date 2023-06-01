@@ -1,10 +1,7 @@
 package com.example.movieappcompose
 
-import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.Converter.Factory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object RetrofitClient {
 //    private const val BASE_URL = "https://www.omdbapi.com/"

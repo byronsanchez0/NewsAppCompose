@@ -1,4 +1,4 @@
-package com.example.movieappcompose.login
+package com.example.movieappcompose.screens.login
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat

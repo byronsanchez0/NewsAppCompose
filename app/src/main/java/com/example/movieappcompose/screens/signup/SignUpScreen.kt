@@ -1,4 +1,4 @@
-package com.example.movieappcompose.signup
+package com.example.movieappcompose.screens.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -63,6 +65,7 @@ fun SignUp(navHostController: NavHostController, viewModel: SignUpViewModel) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary) ,
                 onClick = {
                     if (
                         username.isNotBlank() &&
@@ -80,7 +83,7 @@ fun SignUp(navHostController: NavHostController, viewModel: SignUpViewModel) {
                     }
                 }
             ) {
-                Text("Sign Up")
+                Text("Sign Up", color = MaterialTheme.colorScheme.background,  style = MaterialTheme.typography.bodyMedium)
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.movieappcompose
+package com.example.movieappcompose.screens
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import coil.compose.rememberAsyncImagePainter
+import com.example.movieappcompose.MoviesViewModel
 import com.example.movieappcompose.entity.FavMovie
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.calculateCurrentOffsetForPage

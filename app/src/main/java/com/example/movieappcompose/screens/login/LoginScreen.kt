@@ -1,4 +1,4 @@
-package com.example.movieappcompose.login
+package com.example.movieappcompose.screens.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -66,7 +66,8 @@ fun LoginScreen(
             ) {
                 Text(
                     "Login",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.background
                 )
             }
             Button(
@@ -77,7 +78,8 @@ fun LoginScreen(
             ) {
                 Text(
                     "Sign Up",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.background
                 )
             }
         }

@@ -1,7 +1,6 @@
 package com.example.movieappcompose
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -46,23 +45,19 @@ import androidx.room.Room
 import coil.compose.rememberAsyncImagePainter
 import com.example.movieappcompose.RetrofitClient.searchMovies
 import com.example.movieappcompose.database.FavDataBase
-import com.example.movieappcompose.login.LoginScreen
-import com.example.movieappcompose.login.LoginViewModel
+import com.example.movieappcompose.screens.login.LoginScreen
+import com.example.movieappcompose.screens.login.LoginViewModel
 import com.example.movieappcompose.navigation.MainScreen
 import com.example.movieappcompose.repo.FavRepo
-import com.example.movieappcompose.signup.SignUp
-import com.example.movieappcompose.signup.SignUpViewModel
+import com.example.movieappcompose.screens.Details
+import com.example.movieappcompose.screens.signup.SignUp
+import com.example.movieappcompose.screens.signup.SignUpViewModel
 import com.example.movieappcompose.ui.theme.MovieAppComposeTheme
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-class MainActivity () : ComponentActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
-
-
-    //
-    @OptIn(ExperimentalMaterial3Api::class)
+class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = this.getSharedPreferences("sp", Context.MODE_PRIVATE)
@@ -70,7 +65,8 @@ class MainActivity () : ComponentActivity() {
 
         val db = Room.databaseBuilder(
             this,
-            FavDataBase::class.java, FavDataBase.DATABASE_NAME).build()
+            FavDataBase::class.java, FavDataBase.DATABASE_NAME
+        ).build()
         val favMoviesRepo = FavRepo(db.favMoviesDao())
         var startDestination = "login"
         if (id != 0) {
@@ -82,7 +78,6 @@ class MainActivity () : ComponentActivity() {
             val viewModel = MoviesViewModel(favMoviesRepo)
             MovieAppComposeTheme {
                 val navController = rememberNavController()
-//
                 NavHost(navController = navController, startDestination = startDestination) {
                     composable("login") {
                         val viewModel = LoginViewModel(context)
@@ -96,9 +91,6 @@ class MainActivity () : ComponentActivity() {
                         MainScreen(navController, viewModel)
                     }
                 }
-
-//                MovieSearchScreen()
-
             }
         }
     }
@@ -130,12 +122,13 @@ fun MovieSearchScreen(viewModel: MoviesViewModel) {
                 .align(Alignment.CenterHorizontally)
                 .padding(16.dp)
         ) {
-            Text(text = "Search")
-
+            Text(
+                text = "Search",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.background
+            )
         }
         movieList(movies = movies, viewModel)
-
-
     }
 }
 
@@ -146,9 +139,8 @@ fun movieList(
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(movies) { movie ->
-            MovieItem(movie,viewModel)
+            MovieItem(movie, viewModel)
         }
-
     }
 }
 
@@ -172,12 +164,10 @@ fun MovieItem(
         }
     }
     )
-
     Row(modifier = Modifier
         .padding(16.dp)
         .clickable {
             scope.launch {
-
                 sheetState.partialExpand()
             }
         }) {
@@ -188,7 +178,7 @@ fun MovieItem(
         )
 
         Column(modifier = Modifier.padding(start = 16.dp)) {
-            Text(text = movie.title)
+            Text(text = movie.title, color = MaterialTheme.colorScheme.background)
         }
         IconButton(onClick = { viewModel.addtoFavMovie(movie, getUserId(context)) }) {
             Icon(
@@ -200,14 +190,18 @@ fun MovieItem(
             )
             SnackbarHost(hostState = snackbarHostState) { data ->
                 Snackbar {
-                    Text(text = "anndido", color = Color.White)
+                    Text(
+                        text = "anndido",
+                        color = MaterialTheme.colorScheme.background,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             }
         }
     }
 }
 
-private fun getUserId(context: Context) : Long {
+private fun getUserId(context: Context): Long {
     val sharedPreferences = context.getSharedPreferences("sp", Context.MODE_PRIVATE)
     return sharedPreferences.getInt("userId", 0).toLong()
 }

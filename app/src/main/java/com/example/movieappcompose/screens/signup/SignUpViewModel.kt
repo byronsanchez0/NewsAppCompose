@@ -1,4 +1,4 @@
-package com.example.movieappcompose.signup
+package com.example.movieappcompose.screens.signup
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
