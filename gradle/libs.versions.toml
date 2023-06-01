@@ -29,6 +29,9 @@ material-icons-extended-version = "1.0.5"
 
 def-room-version = "2.5.0"
 
+accompanist-pager-version = "0.20.0"
+compose-ui-utils-version = "1.4.3"
+
 
 
 #retrofit_version = "2.7.1"
@@ -82,6 +85,9 @@ material-icons-v = { group = "androidx.compose.material", name = "material-icons
 room = { group = "androidx.room", name = "room-runtime", version.ref ="def-room-version"}
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref ="def-room-version"}
 kapt = { group = "androidx.room", name = "room-compiler", version.ref ="def-room-version"}
+
+accompanist-pager = { group = "com.google.accompanist.", name = "accompanist-pager", version.ref ="accompanist-pager-version"}
+compose-ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref ="compose-ui-utils-version"}
 
 
 

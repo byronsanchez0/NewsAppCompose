@@ -98,6 +98,9 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     kapt(libs.kapt)
 
+    implementation(libs.compose.ui.util)
+    implementation(libs.accompanist.pager)
+
 
 
 }

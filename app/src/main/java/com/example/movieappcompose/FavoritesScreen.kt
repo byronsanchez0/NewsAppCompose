@@ -6,7 +6,6 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateOffset
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +23,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize.Fill.calculateMainAxisPageSize
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
+
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -48,6 +51,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
@@ -55,7 +59,9 @@ import coil.request.ImageRequest
 import coil.size.Scale
 import com.example.movieappcompose.entity.FavMovie
 
-@OptIn(ExperimentalFoundationApi::class)
+import kotlin.math.absoluteValue
+
+
 @Composable
 fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
     val context = LocalContext.current
@@ -71,10 +77,19 @@ fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        HorizontalPager(
+        Hori(
             pageCount = movies.size,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            state = pagerState
         ) { pageIndex ->
+            Card(
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier.graphicsLayer {
+                    val pageOffset = calculate
+                }
+            ) {
+
+            }
             val item = movies[pageIndex]
             ItemCard(movie = item, moviesViewModel)
 
@@ -86,69 +101,6 @@ fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
     }
 }
 
-//    HorizontalPager(modifier = Modifier.fillMaxSize(), pageCount = movies.size) {
-//        movies.forEach { movie ->
-//            Column(modifier = Modifier.fillMaxSize()) {
-//                AsyncImage(
-//                    model = ImageRequest.Builder(LocalContext.current)
-//                        .data(movie.poster)
-//                        .crossfade(true)
-//                        .scale(Scale.FILL)
-//                        .build(), contentDescription = null
-//                )
-////                Image(
-////                    painter = rememberImagePainter(movie.poster),
-////                    contentDescription = movie.title,
-////                    modifier = Modifier.size(300.dp)
-////                )
-//                IconButton(onClick = { moviesViewModel.deleteFavMovie(movie) }) {
-//                    Icon(
-//                        delBtn,
-//                        contentDescription = stringResource(R.string.start_playlist),
-//                        modifier = Modifier
-//                            .size(50.dp),
-//                        tint = MaterialTheme.colorScheme.inversePrimary
-//                    )
-//
-//                }
-//            }
-//        }
-//    }
-
-
-
-//    HorizontalPager(
-//        modifier = Modifier.fillMaxSize(),
-//        pageCount = movies.size
-//    ) { page ->
-//        Box(
-//            modifier = Modifier
-//                .padding(10.dp)
-//                .background(Color.Blue)
-//                .fillMaxWidth()
-//                .aspectRatio(1f),
-//            contentAlignment = Alignment.Center
-//        ) {
-//            Text(text = page.toString(), fontSize = 32.sp)
-//        }
-//    }
-
-//    LazyColumn(modifier = Modifier.fillMaxSize()) {
-//
-//        items(movies) { movie ->
-//            Text("ESTA PELI TE GUTS: ${movie.title}")
-//            IconButton(onClick = { moviesViewModel.deleteFavMovie(movie) }) {
-//                Icon(
-//                    delBtn,
-//                    contentDescription = stringResource(R.string.start_playlist),
-//                    modifier = Modifier
-//                        .size(50.dp),
-//                    tint = MaterialTheme.colorScheme.inversePrimary
-//                )
-//
-//            }
-//        }
-//    }
 
 
 
@@ -180,56 +132,6 @@ fun ItemCard(movie: FavMovie, moviesViewModel: MoviesViewModel) {
                 }
     }
 }
-
-//@Composable
-//fun HorizontalPagesWithImageList(images: List<Int>) {
-//    var currentPage by remember { mutableStateOf(0) }
-//    val transition = updateTransition(currentPage, label = "currentPageTransition")
-//    val offset by transition.animateOffset(
-//        transitionSpec = {
-//            tween(durationMillis = 300, easing = LinearOutSlowInEasing)
-//        }
-//    ) { page ->
-//        page * -200f
-//    }
-//
-//    Box(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .padding(horizontal = 16.dp)
-//    ) {
-//        LazyRow(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .align(Alignment.Center)
-//                .offset { IntOffset(offset.toInt(), 0) }
-//                .animateContentSize(),
-//            contentPadding = PaddingValues(horizontal = 8.dp)
-//        ) {
-//            items(images) { image ->
-//                Image(
-//                    painter = painterResource(id = image),
-//                    contentDescription = null,
-//                    modifier = Modifier
-//                        .size(200.dp)
-//                        .clip(MaterialTheme.shapes.medium)
-//                )
-//            }
-//        }
-//
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .align(Alignment.BottomCenter)
-//                .padding(bottom = 16.dp),
-//            horizontalArrangement = Arrangement.Center
-//        ) {
-//            images.forEachIndexed { index, _ ->
-//                PageIndicator(index == currentPage)
-//            }
-//        }
-//    }
-//}
 
 private fun getUserId(context: Context): Int {
     val sharedPreferences = context.getSharedPreferences("sp", Context.MODE_PRIVATE)

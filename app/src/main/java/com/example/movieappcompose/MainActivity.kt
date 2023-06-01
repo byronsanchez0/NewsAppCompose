@@ -169,7 +169,6 @@ fun MovieItem(
     }
     )
 
-
     Row(modifier = Modifier
         .padding(16.dp)
         .clickable {
