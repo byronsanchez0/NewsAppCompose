@@ -29,17 +29,28 @@ fun Details(
             ModalBottomSheet(
                 modifier = Modifier.fillMaxSize(),
                 onDismissRequest = onDismiss,
-                sheetState = sheetState
+                sheetState = sheetState,
             ) {
                 Image(
+                    alignment = Alignment.Center,
                     painter = rememberAsyncImagePainter(movie.poster),
                     contentDescription = "Movie Poster",
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier.size(width = 350.dp, height = 350.dp)
                 )
-                Column(modifier = Modifier.padding(start = 16.dp)) {
-                    Text(text = movie.title, color = MaterialTheme.colorScheme.background,  style = MaterialTheme.typography.bodyMedium)
+                Column(modifier = Modifier.padding(start = 35.dp)) {
+                    Text(
+                        modifier = Modifier.padding(vertical = 20.dp),
+                        text = movie.title,
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        text = movie.year,
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             }
         }
     }
-}
