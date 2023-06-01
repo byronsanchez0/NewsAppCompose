@@ -32,6 +32,9 @@ def-room-version = "2.5.0"
 accompanist-pager-version = "0.20.0"
 compose-ui-utils-version = "1.4.3"
 
+ktorClientCore = "1.6.8"
+json-serialization = "1.5.0"
+
 
 
 #retrofit_version = "2.7.1"
@@ -54,7 +57,7 @@ ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-material3 = { group = "androidx.compose.material3", name = "material3", version.ref= "material3"}
+material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 compose_material_icons_core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "compose_material_icons_core" }
 compose_material_icons_extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose_material_icons_extended" }
@@ -63,19 +66,32 @@ runtime_livedata = { group = "androidx.compose.runtime", name = "runtime-livedat
 runtime_rxjava2 = { group = "androidx.compose.runtime", name = "runtime-rxjava2", version.ref = "runtime_rxjava2" }
 coil_compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil_compose" }
 kotlinx_coroutines_core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx_coroutines_core" }
-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose"}
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gson"}
+converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gson" }
 
-material-v = { group = "androidx.compose.material", name = "material", version.ref ="material-version"}
-material-icons-v = { group = "androidx.compose.material", name = "material-icons-extended", version.ref ="material-icons-extended-version"}
+material-v = { group = "androidx.compose.material", name = "material", version.ref = "material-version" }
+material-icons-v = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "material-icons-extended-version" }
 
-room = { group = "androidx.room", name = "room-runtime", version.ref ="def-room-version"}
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref ="def-room-version"}
-kapt = { group = "androidx.room", name = "room-compiler", version.ref ="def-room-version"}
+room = { group = "androidx.room", name = "room-runtime", version.ref = "def-room-version" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "def-room-version" }
+kapt = { group = "androidx.room", name = "room-compiler", version.ref = "def-room-version" }
 
-accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref ="accompanist-pager-version"}
-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref ="compose-ui-utils-version"}
+accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist-pager-version" }
+compose-ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref = "compose-ui-utils-version" }
+
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCore" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientCore" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-gson = { module = "io.ktor:ktor-client-gson", version.ref = "ktorClientCore" }
+ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktorClientCore" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientCore" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientCore" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktorClientCore" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientCore" }
+ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktorClientCore" }
+
+json-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json-serialization" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
@@ -85,4 +101,17 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 
 
 [bundles]
+
+ktor = [
+    "ktor-client-cio",
+    "ktor-client-content-negotiation",
+    "ktor-client-core",
+    "ktor-client-gson",
+    "ktor-client-json",
+    "ktor-client-logging",
+    "ktor-client-okhttp",
+    "ktor-client-serialization",
+    "ktor-serialization-kotlinx-json",
+    "ktor-server-cors"]
+
 

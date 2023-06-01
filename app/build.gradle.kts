@@ -8,7 +8,15 @@ android {
     namespace = "com.example.movieappcompose"
     compileSdk = 33
 
+
+
     defaultConfig {
+
+        buildConfigField(
+            "String",
+            "GUARDIAN_API_BASE_URL",
+            project.property("guardianApiBaseUrl").toString()
+        )
         applicationId = "com.example.movieappcompose"
         minSdk = 24
         targetSdk = 33
@@ -19,6 +27,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
     }
 
     buildTypes {
@@ -39,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.2"
@@ -100,6 +111,11 @@ dependencies {
 
     implementation(libs.compose.ui.util)
     implementation(libs.accompanist.pager)
+
+    implementation(libs.bundles.ktor)
+    implementation(libs.json.serialization)
+
+
 
 
 

@@ -4,20 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-//    private const val BASE_URL = "https://www.omdbapi.com/"
-//    const val API_KEY = "34a8034"
-//
-//    private val retrofit: Retrofit by lazy {
-//        Retrofit.Builder()
-//        .baseUrl(BASE_URL)
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-//    }
-//
-//
-//    val movieService: MoviesService by lazy{
-//        retrofit.create(MoviesService::class.java)
-//    }
+
 private const val BASE_URL = "https://www.omdbapi.com/"
 
     private val retrofit : Retrofit by lazy {

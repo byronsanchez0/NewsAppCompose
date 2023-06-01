@@ -8,7 +8,7 @@ interface MoviesService {
     @GET("/")
     suspend fun searchMovies(
         @Query("apiKey") apikey: String,
-        @Query("s") searchTerm: String
+        @Query("search") searchTerm: String
 
-    ): Response<MovieSearchResponse>
+    ): Response<GuardianResponse>
 }
