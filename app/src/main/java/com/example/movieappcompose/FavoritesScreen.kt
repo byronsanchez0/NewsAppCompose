@@ -102,10 +102,10 @@ fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
                         }
                 }
             ) {
-
+                val item = movies[pageIndex]
+                ItemCard(movie = item, moviesViewModel)
             }
-            val item = movies[pageIndex]
-            ItemCard(movie = item, moviesViewModel)
+
 
         }
     }
