@@ -67,7 +67,7 @@ fun LoginScreen(
                 Text(
                     "Login",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.inverseSurface
                 )
             }
             Button(
@@ -79,7 +79,7 @@ fun LoginScreen(
                 Text(
                     "Sign Up",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.inverseSurface
                 )
             }
         }

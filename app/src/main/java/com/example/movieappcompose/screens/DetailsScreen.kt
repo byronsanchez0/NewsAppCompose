@@ -36,8 +36,25 @@ fun Details(
                     contentDescription = "Movie Poster",
                     modifier = Modifier.size(80.dp)
                 )
-                Column(modifier = Modifier.padding(start = 16.dp)) {
-                    Text(text = movie.title, color = MaterialTheme.colorScheme.background,  style = MaterialTheme.typography.bodyMedium)
+                Column(modifier = Modifier.padding(start = 20.dp)) {
+                    Text(
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        text = movie.title,
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        text = movie.year,
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        text = movie.actors,
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             }
         }

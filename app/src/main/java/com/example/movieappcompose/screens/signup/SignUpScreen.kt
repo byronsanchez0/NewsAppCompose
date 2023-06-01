@@ -83,7 +83,7 @@ fun SignUp(navHostController: NavHostController, viewModel: SignUpViewModel) {
                     }
                 }
             ) {
-                Text("Sign Up", color = MaterialTheme.colorScheme.background,  style = MaterialTheme.typography.bodyMedium)
+                Text("Sign Up", color = MaterialTheme.colorScheme.inverseSurface,  style = MaterialTheme.typography.bodyMedium)
             }
         }
     }
