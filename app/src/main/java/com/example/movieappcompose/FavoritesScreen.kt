@@ -6,6 +6,7 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateOffset
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize.Fill.calculateMainAxisPageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -58,10 +60,13 @@ import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
 import com.example.movieappcompose.entity.FavMovie
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.calculateCurrentOffsetForPage
 
 import kotlin.math.absoluteValue
 
 
+@OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
     val context = LocalContext.current
@@ -69,7 +74,7 @@ fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
 
     moviesViewModel.getFavMovie(id.toLong())
     val movies by moviesViewModel.movies.collectAsState()
-    val pagerState = rememberPagerState()
+
     var currentPage by remember { mutableStateOf(0) }
 
     Box(
@@ -77,15 +82,24 @@ fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        Hori(
-            pageCount = movies.size,
+        com.google.accompanist.pager.HorizontalPager(
+            count = movies.size,
             modifier = Modifier.fillMaxSize(),
-            state = pagerState
+            state = com.google.accompanist.pager.rememberPagerState()
         ) { pageIndex ->
             Card(
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.graphicsLayer {
-                    val pageOffset = calculate
+                    val pageOffset = calculateCurrentOffsetForPage(pageIndex).absoluteValue
+                    lerp(
+                        start = 0.50f,
+                        stop = 1f,
+                        fraction = 1f- pageOffset.coerceIn(0f, 1f)
+                    )
+                        .also{scale ->
+                            scaleX = scale
+                            scaleY = scale
+                        }
                 }
             ) {
 
@@ -94,10 +108,6 @@ fun FavoritesScreen(moviesViewModel: MoviesViewModel) {
             ItemCard(movie = item, moviesViewModel)
 
         }
-
-
-        // Indicator dots for pagination
-
     }
 }
 
@@ -116,9 +126,8 @@ fun ItemCard(movie: FavMovie, moviesViewModel: MoviesViewModel) {
     ) {
         Image(
             painter = rememberAsyncImagePainter(movie.poster),
-
             contentDescription = "Movie Poster",
-            modifier = Modifier.size(80.dp)
+            modifier = Modifier.size(200.dp)
         )
         IconButton(onClick = { moviesViewModel.deleteFavMovie(movie) }) {
                     Icon(

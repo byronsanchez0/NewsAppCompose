@@ -86,7 +86,7 @@ room = { group = "androidx.room", name = "room-runtime", version.ref ="def-room-
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref ="def-room-version"}
 kapt = { group = "androidx.room", name = "room-compiler", version.ref ="def-room-version"}
 
-accompanist-pager = { group = "com.google.accompanist.", name = "accompanist-pager", version.ref ="accompanist-pager-version"}
+accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref ="accompanist-pager-version"}
 compose-ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref ="compose-ui-utils-version"}
 
 
