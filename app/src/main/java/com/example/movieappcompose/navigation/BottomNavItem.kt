@@ -2,7 +2,7 @@ package com.example.movieappcompose.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.CameraAlt
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomNavItem(var icon: ImageVector, var route: String){
@@ -12,8 +12,7 @@ sealed class BottomNavItem(var icon: ImageVector, var route: String){
     )
 
     object Favorites : BottomNavItem(
-        Icons.Outlined.CameraAlt,
+        Icons.Outlined.Favorite,
         "favorites"
     )
 }
-

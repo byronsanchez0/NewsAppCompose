@@ -1,15 +1,16 @@
-package com.example.movieappcompose
+package com.example.movieappcompose.login
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import androidx.lifecycle.ViewModel
+import com.example.movieappcompose.User
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.Date
 
 class LoginViewModel(private val context: Context) : ViewModel() {
 
-    fun login(username: String, password: String) : String? {
+    fun login(username: String, password: String): String? {
         if (username.isBlank() || password.isBlank()) {
             return "Username or Password is empty"
         }
@@ -20,8 +21,8 @@ class LoginViewModel(private val context: Context) : ViewModel() {
         }
         val listType = object : TypeToken<ArrayList<User>>() {}.type
         val gson = Gson()
-        val users : ArrayList<User> = gson.fromJson(usersJson, listType)
-        users.forEach {user ->
+        val users: ArrayList<User> = gson.fromJson(usersJson, listType)
+        users.forEach { user ->
             if (user.username == username && user.password == password) {
                 onLoginSuccess(user)
                 return null
@@ -38,5 +39,4 @@ class LoginViewModel(private val context: Context) : ViewModel() {
         val currentDate = sdf.format(Date())
         sharedPreferences.edit().putString("connection", currentDate).apply()
     }
-
 }

@@ -10,7 +10,5 @@ data class Movie(
     @SerializedName("Poster")
     val poster: String,
     @SerializedName("Year")
-    val year: String,
-    @SerializedName("Response")
-    val response: String
+    val year: String
 )

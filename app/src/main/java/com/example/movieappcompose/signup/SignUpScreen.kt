@@ -1,4 +1,4 @@
-package com.example.movieappcompose
+package com.example.movieappcompose.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

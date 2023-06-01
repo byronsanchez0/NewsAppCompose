@@ -1,7 +1,8 @@
-package com.example.movieappcompose
+package com.example.movieappcompose.signup
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.movieappcompose.User
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

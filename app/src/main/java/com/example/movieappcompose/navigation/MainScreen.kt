@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.ModalDrawer
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Output
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -49,27 +49,35 @@ fun MainScreen(rootNav: NavHostController, moviesViewModel: MoviesViewModel) {
         drawerState = drawerState,
         gesturesEnabled = drawerState.isOpen,
         drawerContent = {
-            Column {
-                Text(text = "Movie App")
-                Button(onClick = {
-                    deleteUserId(context)
-                    rootNav.apply {
-                        val route = "login"
-                        navigate(route = route) {
-                            popUpTo(graph.startDestinationId) { inclusive = true }
+            Column(modifier = Modifier.padding(horizontal = 30.dp)) {
+                Text(
+                    text = "Movie App",
+                    modifier = Modifier.padding(top = 30.dp),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Button(
+                    onClick = {
+                        deleteUserId(context)
+                        rootNav.apply {
+                            val route = "login"
+                            navigate(route = route) {
+                                popUpTo(graph.startDestinationId) { inclusive = true }
+                            }
+                            graph.setStartDestination(route)
                         }
-                        graph.setStartDestination(route)
-                    }
-                }) {
-                    Text(text = "Logout")
+                    },
+                    modifier = Modifier.padding(top = 30.dp)
+                )
+                {
+                    Text(text = "Logout", style = MaterialTheme.typography.bodyMedium)
                 }
-                Text(text = "Date: $lastConnection")
+                Text(text = "Last connection: $lastConnection", style = MaterialTheme.typography.bodyMedium)
             }
         },
         content = {
             Column {
                 TopAppBar(
-                    title = { Text(text = "Drawer Menu") },
+                    title = { Text(text = "") },
                     navigationIcon = {
                         IconButton(
                             onClick = {
@@ -84,7 +92,7 @@ fun MainScreen(rootNav: NavHostController, moviesViewModel: MoviesViewModel) {
                             }
                         ) {
                             Icon(
-                                imageVector = Icons.Default.Menu,
+                                imageVector = Icons.Default.Output,
                                 contentDescription = "Menu"
                             )
                         }
@@ -124,12 +132,11 @@ fun BottomBar(navHostController: NavHostController) {
                 screen = screen,
                 currentDestination = currentDestination,
                 navController = navHostController,
-
-                )
+            )
         }
-
     }
 }
+
 @Composable
 fun RowScope.AddItem(
     screen: BottomNavItem,
@@ -156,7 +163,6 @@ fun RowScope.AddItem(
             indicatorColor = MaterialTheme.colorScheme.onPrimary
         )
     )
-
 }
 
 private fun deleteUserId(context: Context) {

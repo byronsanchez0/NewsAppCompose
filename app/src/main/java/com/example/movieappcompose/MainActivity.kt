@@ -46,8 +46,12 @@ import androidx.room.Room
 import coil.compose.rememberAsyncImagePainter
 import com.example.movieappcompose.RetrofitClient.searchMovies
 import com.example.movieappcompose.database.FavDataBase
+import com.example.movieappcompose.login.LoginScreen
+import com.example.movieappcompose.login.LoginViewModel
 import com.example.movieappcompose.navigation.MainScreen
 import com.example.movieappcompose.repo.FavRepo
+import com.example.movieappcompose.signup.SignUp
+import com.example.movieappcompose.signup.SignUpViewModel
 import com.example.movieappcompose.ui.theme.MovieAppComposeTheme
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -185,7 +189,6 @@ fun MovieItem(
 
         Column(modifier = Modifier.padding(start = 16.dp)) {
             Text(text = movie.title)
-//            Text(text = movie.released)
         }
         IconButton(onClick = { viewModel.addtoFavMovie(movie, getUserId(context)) }) {
             Icon(
@@ -197,7 +200,7 @@ fun MovieItem(
             )
             SnackbarHost(hostState = snackbarHostState) { data ->
                 Snackbar {
-                    Text(text = "a;adido", color = Color.White)
+                    Text(text = "anndido", color = Color.White)
                 }
             }
         }

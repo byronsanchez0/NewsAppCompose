@@ -1,4 +1,4 @@
-package com.example.movieappcompose
+package com.example.movieappcompose.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +9,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.movieappcompose.LoginViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -61,17 +61,13 @@ fun LoginScreen(
                     } else {
                         navHostController.navigate("mainscreen")
                     }
-//                val userLogged = performLogin(username, password)
-//                if (userLogged != null) {
-//                    onLoginSuccess(context, userLogged)
-//                    navHostController.navigate("mainscreen")
-//                } else {
-//                    // Show an error message or handle login failure
-//                }
                 },
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text("Login")
+                Text(
+                    "Login",
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
             Button(
                 onClick = {
@@ -79,20 +75,11 @@ fun LoginScreen(
                 },
                 modifier = Modifier.padding(10.dp)
             ) {
-                Text("Sign Up")
+                Text(
+                    "Sign Up",
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }
-}
-
-fun performLogin(username: String, password: String): String? {
-    var userLogged: String? = null
-    // Replace this with your own authentication logic
-    if (username == "admin" && password == "password") {
-        userLogged = username
-    }
-    if (username == "manager" && password == "password") {
-        userLogged = username
-    }
-    return userLogged
 }
