@@ -11,6 +11,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -29,16 +30,17 @@ fun Details(
             ModalBottomSheet(
                 modifier = Modifier.fillMaxSize(),
                 onDismissRequest = onDismiss,
-                sheetState = sheetState
+                sheetState = sheetState,
             ) {
                 Image(
+                    alignment = Alignment.Center,
                     painter = rememberAsyncImagePainter(movie.poster),
                     contentDescription = "Movie Poster",
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier.size(width = 350.dp, height = 350.dp)
                 )
-                Column(modifier = Modifier.padding(start = 20.dp)) {
+                Column(modifier = Modifier.padding(start = 35.dp)) {
                     Text(
-                        modifier = Modifier.padding(vertical = 10.dp),
+                        modifier = Modifier.padding(vertical = 20.dp),
                         text = movie.title,
                         color = MaterialTheme.colorScheme.inverseSurface,
                         style = MaterialTheme.typography.bodyMedium
@@ -46,12 +48,6 @@ fun Details(
                     Text(
                         modifier = Modifier.padding(vertical = 10.dp),
                         text = movie.year,
-                        color = MaterialTheme.colorScheme.inverseSurface,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        modifier = Modifier.padding(vertical = 10.dp),
-                        text = movie.actors,
                         color = MaterialTheme.colorScheme.inverseSurface,
                         style = MaterialTheme.typography.bodyMedium
                     )
